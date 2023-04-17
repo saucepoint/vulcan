@@ -76,4 +76,40 @@ contract StringsTest is Test {
 
         expect(value.parseBool()).toBeFalse();
     }
+
+    function testEquals() external {
+        string memory value = "hello";
+        string memory value2 = "hello";
+        string memory value3 = "world";
+
+        expect(value.equals(value)).toBeTrue();
+        expect(value.equals(value2)).toBeTrue();
+        expect(value.equals(value3)).toBeFalse();
+    }
+
+    function testCharAt() external {
+        string memory value = "hello";
+
+        expect(value.charAt(0)).toEqual("h");
+        expect(value.charAt(1)).toEqual("e");
+        expect(value.charAt(2)).toEqual("l");
+        expect(value.charAt(3)).toEqual("l");
+        expect(value.charAt(4)).toEqual("o");
+    }
+
+    function testSlice() external {
+        string memory value = "world";
+
+        expect(value.slice(0, 1)).toEqual("w");
+        expect(value.slice(0, 2)).toEqual("wo");
+        expect(value.slice(1, 5)).toEqual("orld");
+        expect(value.slice(1, 4)).toEqual("orl");
+    }
+
+    function testSplit() external {
+        string memory value = "src = 'src'";
+        string[2] memory parts = value.split(" = ");
+        expect(parts[0]).toEqual("src");
+        expect(parts[1]).toEqual("'src'");
+    }
 }
